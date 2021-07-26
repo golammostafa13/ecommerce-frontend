@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardContent, CardActions, CardMedia, Typography, IconButton} from '@material-ui/core';
+import {Card, CardContent, CardActions, CardMedia, Typography, IconButton, Button} from '@material-ui/core';
 import {AddShoppingCart} from '@material-ui/icons';
 import useStyle from './style.js';
 
@@ -17,6 +17,7 @@ const Product = ({product, onAddCart}) => {
                 <Typography dangerouslySetInnerHTML={{__html: product.description}} variant="body2" color="textSecondary" />
             </CardContent>
             <CardActions disableSpacing className={classes.cardActions}>
+		<Button>Add To Cart</Button>
                 <IconButton aria-label="Add To Cart" onClick={() => onAddCart(product.id, 1)}>
                     <AddShoppingCart />
                 </IconButton>
