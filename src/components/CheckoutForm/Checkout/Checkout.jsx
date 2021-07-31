@@ -11,7 +11,7 @@ const Checkout = ({cart}) => {
     const classes = useStyle();
     const steps = ['Shipping Adress', 'Payment Details']
     const [checkoutToken, setCheckoutToken] = useState({});
-
+    const [shippingData, setShippingData] = useState({});
     
     useEffect(() => {
         const fetchCheckoutToken = async () => {
@@ -21,9 +21,21 @@ const Checkout = ({cart}) => {
         fetchCheckoutToken();
     }, [cart]);
 
+    const nextStep = () => {
+        setActiveStep(preState => preState + 1);
+    }
+    const backStep = () => {
+        setActiveStep(preState => preState - 1);
+    }
+    const next = (data) => {
+        setShippingData(data);
+        nextStep();
+    }
+
     const Form = () =>(
-        activeStep === 0 ? <AdressForm checkoutToken={checkoutToken} /> : <PaymentForm />
+        activeStep === 0 ? <AdressForm checkoutToken={checkoutToken} next={next} /> : <PaymentForm />
     )
+    
     return (
         <>
             <div className={classes.toolbar} />

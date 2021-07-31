@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Grid, Typography, InputLabel, Select, MenuItem} from '@material-ui/core';
+import {Grid, Typography, InputLabel, Select, MenuItem, Button} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import FormInput from './FormInput';
 import {useForm, FormProvider} from 'react-hook-form';
 import {commerce} from '../../lib/commerce.js';
 
-const AdressForm = ({checkoutToken}) => {
+const AdressForm = ({checkoutToken, next}) => {
     const methods = useForm();
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState('');
@@ -51,7 +52,7 @@ const AdressForm = ({checkoutToken}) => {
         <>
             <Typography variant="h6" gutterBottom>Shipping Adress</Typography>
             <FormProvider {...methods}>
-                <form onSubmit="">
+                <form onSubmit={methods.handleSubmit((data) => next({...data, shippingCountry, shippingSubdivision, shippingOption}))}>
                     <Grid container spacing={3}>
                             <FormInput required name="firstName" label="First Name" />
                             <FormInput required name="lastName" label="Last Name" />
@@ -90,6 +91,11 @@ const AdressForm = ({checkoutToken}) => {
                                 </Select>
                             </Grid>
                     </Grid>
+                    <br/>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <Button component={Link} to="/cart" variant="outlined">Back To Cart</Button>
+                        <Button type='submit' variant="contained" color="primary">Next</Button>
+                    </div>
                 </form>
             </FormProvider>
         </>
