@@ -35,12 +35,15 @@ const App = () => {
 		const {cart} = await commerce.cart.empty();
 		setCart(cart);
 	}
+	const loading = () => (
+		<img style={{height:'100vh', width:'100vw'}} src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Fmax_1200%2Fb6e0b072897469.5bf6e79950d23.gif&f=1&nofb=1' alt='loading' />
+	)
 	return (
 		<Router>
 			<Header totalItems={cart.total_items}/>
 			<Switch>
 				<Route exact path="/">
-					<Products products={products} onAddCart={handleAddToCart} />
+					{products.length ? <Products products={products} onAddCart={handleAddToCart} /> : loading}
 				</Route>
 				<Route exact path="/cart">
 					<Cart cart={cart} onUpdateCart={handleUpdateCart} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
