@@ -36,7 +36,7 @@ const AdressForm = ({checkoutToken, next}) => {
             setShippingSubdivisions(subdivisions);
             setShippingSubdivision(Object.keys(subdivisions)[0]);
         }
-        fetchSubdivisions(shippingCountry);
+        if(shippingCountry)fetchSubdivisions(shippingCountry);
     }, [shippingCountry]);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const AdressForm = ({checkoutToken, next}) => {
             setShippingOptions(options);
             setShippingOption(options[0].id);
         }
-        fetchOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
+        if(shippingSubdivision)fetchOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
     }, [shippingSubdivision]);
 
     return (

@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {fetchProducts, fetchCart} from './components/api/fetchData';
 import {commerce} from './lib/commerce';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 
 const App = () => {
 	const [products, setProducts] = useState([]);
@@ -46,6 +47,9 @@ const App = () => {
 				</Route>
 				<Route exact path="/checkout">
 					<Checkout cart={cart}/>
+				</Route>
+				<Route exact path="/productDetail/:productId">
+					<ProductDetail products={products}/>
 				</Route>
 			</Switch>
 			<Footer />
